@@ -25,8 +25,6 @@ public class GarageControllerTest {
     @MockBean
     GarageService garageService;
 
-
-
     @Test
     public void parkShip_thenStatus200() throws Exception {
         String licensePlate = "ABC123";
@@ -42,8 +40,5 @@ public class GarageControllerTest {
                         .param("parkingLotNumber", String.valueOf(parkingLotNumber)))
                 .andExpect(status().isOk());
     }
-
-
-
 }
 

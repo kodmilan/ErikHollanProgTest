@@ -21,6 +21,7 @@ public class GarageController {
     public ResponseEntity leave(@RequestParam int parkingLotNumber) {
         return garageService.leave(parkingLotNumber);
     }
+
     @GetMapping("/parkedShips")
     public ResponseEntity parkedShips() {
         return garageService.parkedShips();

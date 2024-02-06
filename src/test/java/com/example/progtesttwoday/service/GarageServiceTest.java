@@ -1,4 +1,5 @@
 package com.example.progtesttwoday.service;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -40,13 +41,13 @@ class GarageServiceTest {
 
     @Test
     void testParkShip_SuccessfulParking() {
-
         ParkedShip[] parkingLots = new ParkedShip[45];
+
         when(garage.getParkingLots()).thenReturn(parkingLots);
+
         when(parkedShipRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
 
         ResponseEntity responseEntity = garageService.park("ABC123");
-
 
         assertEquals(ResponseEntity.ok().body("SHIP PARKED ON SPOT: 1"), responseEntity);
     }

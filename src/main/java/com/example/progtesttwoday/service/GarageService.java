@@ -28,8 +28,8 @@ public class GarageService {
         LocalDateTime parkingTime = garage.getParkingLots()[parkingLotNumber - 1].getParkingDateTime();
         Duration duration = Duration.between(parkingTime, timeNow);
         long hours = duration.toHours();
-
         double cost;
+
         if (hours >= 1 && hours <= MAX_HOURS_FOR_DAY_RATE) {
             cost = hours * PARKING_COST;
         } else if (hours < 1) {
@@ -51,7 +51,6 @@ public class GarageService {
     }
 
     public ResponseEntity park(String licensePlate) {
-
         populateGarageArray();
 
         for (int i = 0; i < garage.getParkingLots().length; i++) {
@@ -70,10 +69,13 @@ public class GarageService {
         if (parkingLotNumber < 1 || parkingLotNumber > garage.getParkingLots().length) {
             return ResponseEntity.badRequest().body("invalid parking lot number: " + parkingLotNumber);
         }
+
         ParkedShip parkedShip = garage.getParkingLots()[parkingLotNumber - 1];
+
         if (parkedShip == null) {
             return ResponseEntity.badRequest().body("No ship is parked on this parking lot: " + parkingLotNumber);
         }
+
         parkedShip.setLeavingDateTime(LocalDateTime.now());
         double cost = calculateParkingCost(parkingLotNumber);
         parkedShip.setFinalParkingCost(cost);
